@@ -1,12 +1,16 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addtoCart } from '../redux/reducers/cart';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const GoodsItem = (item) => {
        const { mainId, displayName, displayDescription, displayType, price, displayAssets, mainType, rarity } = item;
 
        const dispatch = useDispatch();
        const { orders } = useSelector(state => state.cart);
+
+       const notify = () => toast(`The ${displayName} was add to cart!`);
 
 
     //    const addToBasket = (item) => {
@@ -48,7 +52,13 @@ const GoodsItem = (item) => {
             <div className="card-content">
                 <span className="card-title activator grey-text text-darken-4">{displayName}<i className="material-icons right">more_vert</i></span>
                 <div className='card-content-row bottom'> 
-                    <p><button onClick={()=> dispatch(addtoCart(item))} className='btn'>Buy</button></p>
+                    <p><button onClick={()=> {
+
+                        dispatch(addtoCart(item))
+                        notify()
+                        
+                        }} className='btn'>Buy</button></p>
+                        <ToastContainer />
                     <span>{}</span>
 
                     <div>

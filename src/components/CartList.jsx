@@ -3,14 +3,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import CartItem from './CartItem';
 import { clearCart } from '../redux/reducers/cart';
 import { calcTotalPrice } from '../redux/reducers/cart';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CartList = ({openCart, setOpenCart}) => {
     const dispatch = useDispatch();
     const { orders = [] } = useSelector(state => state.cart);
+    const notify = () => toast(`Your order has been placed`);
 
-    //  const calcTotalPrice = (items) => {
-    //     return items.reduce((sum, obj) => obj.price * obj.count + sum, 0);
-    //   };
+
 
 
     return (
@@ -37,8 +38,12 @@ const CartList = ({openCart, setOpenCart}) => {
                     <button onClick={()=>{ 
                         setOpenCart(false)
                         dispatch(clearCart())
+                        notify()
                         }} 
-                        className='btn'>Checkout</button>
+                        className='btn'
+                    >Checkout</button>
+                    <ToastContainer />
+
                 </div>
 
 
