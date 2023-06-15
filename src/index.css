@@ -195,3 +195,7 @@ code {
 .cartItem__count{
   padding: 0 1rem;
 }
+
+.brand-logo{
+  white-space: nowrap;
+}
